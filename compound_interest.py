@@ -1,28 +1,27 @@
-def calculate_compound_interest(principal, rate, time, n=1):
+def compound_interest(principal, rate, time, n=1):
+    """
+    Calculate compound interest.
+    principal: initial amount
+    rate: annual interest rate (e.g., 5 for 5%)
+    time: time in years
+    n: compounding frequency per year (default: 1 = annually)
+    """
     amount = principal * (1 + rate / (100 * n)) ** (n * time)
-    return amount - principal
-
-
-def main():
-    print("Compound Interest Calculator")
-    print("-" * 30)
-
-    principal = float(input("Enter Principal amount: "))
-    rate = float(input("Enter Rate of interest (% per year): "))
-    time = float(input("Enter Time period (years): "))
-    n = int(input("Enter compounding frequency per year (e.g. 1=yearly, 12=monthly): "))
-
-    interest = calculate_compound_interest(principal, rate, time, n)
-    total = principal + interest
-
-    print("-" * 30)
-    print(f"Principal:          {principal:>10.2f}")
-    print(f"Rate:               {rate:>9.2f}%")
-    print(f"Time:               {time:>8.2f} yrs")
-    print(f"Compounding:        {n:>10}x/yr")
-    print(f"Compound Interest:  {interest:>10.2f}")
-    print(f"Total Amount:       {total:>10.2f}")
+    interest = amount - principal
+    return round(amount, 2), round(interest, 2)
 
 
 if __name__ == "__main__":
-    main()
+    principal = float(input("Enter principal amount: "))
+    rate = float(input("Enter annual interest rate (%): "))
+    time = float(input("Enter time (years): "))
+    n = int(input("Enter compounding frequency per year (1=annually, 12=monthly, 365=daily): "))
+
+    amount, interest = compound_interest(principal, rate, time, n)
+
+    print(f"\nPrincipal:        ${principal:.2f}")
+    print(f"Rate:             {rate}%")
+    print(f"Time:             {time} years")
+    print(f"Compounded:       {n}x per year")
+    print(f"Compound Interest: ${interest:.2f}")
+    print(f"Total Amount:     ${amount:.2f}")
